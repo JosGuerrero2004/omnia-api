@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+group = 'org.josiasguerrero'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Infrastructure - Spring dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Shared
+    implementation project(':modules:shared')
+}
+
+test {
+    useJUnitPlatform()
+}

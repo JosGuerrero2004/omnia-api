@@ -1,0 +1,11 @@
+plugins {
+    id 'java'
+    id 'java-library'
+  }
+
+group = 'org.josiasguerrero'
+version = '1.0.0'
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+  }

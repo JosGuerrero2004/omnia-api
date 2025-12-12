@@ -3,7 +3,7 @@ spring:
     name: omnia-api
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:${DB_PORT:5432}/${DB:omniadb}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:${DB_PORT:5432}/${DB:omniadb}}
     username: ${DB_USERNAME:omniauser}
     password: ${DB_PASSWORD:omniapass}
     driver-class-name: org.postgresql.Driver
@@ -42,17 +42,17 @@ logging:
       hibernate:
         SQL: ${LOGGING_LEVEL:INFO}
 
-security:
-  module:
-    jwt:
-      secret: ${JWT_SECRET}
-      expiration: 60
-      refresh-expiration: 1440
-    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173}
-    public-endpoints: /api/public/**,/api/auth/refresh
-    app-admin:
-      email: ${ADMIN_EMAIL}
-      password: ${ADMIN_PASSWORD}
+# security:
+#   module:
+#     jwt:
+#       secret: ${JWT_SECRET}
+#       expiration: 60
+#       refresh-expiration: 1440
+#     allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173}
+#     public-endpoints: /api/public/**,/api/auth/refresh
+#     app-admin:
+#       email: ${ADMIN_EMAIL}
+#       password: ${ADMIN_PASSWORD}
 
 management:
   endpoints:
