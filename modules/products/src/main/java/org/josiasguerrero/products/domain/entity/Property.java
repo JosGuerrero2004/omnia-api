@@ -29,6 +29,12 @@ public class Property {
     this.updatedAt = updatedAt;
   }
 
+  public Property(String name) {
+    this.name = validateName(name);
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = LocalDateTime.now();
+  }
+
   public void updateName(String newName) {
     this.name = validateName(newName);
     this.updatedAt = LocalDateTime.now();

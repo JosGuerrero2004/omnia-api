@@ -11,4 +11,9 @@ public record Sku(String value) {
       throw new IllegalArgumentException("SKU cannot exceed 50 characteres");
     }
   }
+
+  public static Sku from(String value) {
+    return new Sku(value);
+
+  }
 }

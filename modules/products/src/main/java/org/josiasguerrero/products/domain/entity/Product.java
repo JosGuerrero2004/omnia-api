@@ -89,9 +89,17 @@ public class Product {
     this.updatedAt = LocalDateTime.now();
   }
 
-  public void setStock(int amount) {
+  public void adjustStock(int amount) {
     this.stock = new Stock(amount);
     this.updatedAt = LocalDateTime.now();
+  }
+
+  public void setBarcode(Barcode barcode) {
+    this.barcode = barcode;
+  }
+
+  public void assignToBrand(BrandId brandId) {
+    this.brandId = brandId;
   }
 
   public boolean hasStock() {
@@ -114,6 +122,9 @@ public class Product {
   }
 
   private void validatePricing(Money cost, Money price) {
+    if (cost == null || price == null) {
+      throw new IllegalArgumentException("Cost and price cannot be null");
+    }
     if (price.isGreaterThan(cost)) {
       return;
     }
@@ -173,4 +184,35 @@ public class Product {
     return properties;
   }
 
+  public void assignToCategory(CategoryId categoryId) {
+    this.categoryIds.add(categoryId);
+  }
+
+  public void addProperty(PropertyId propertyId, PropertyValue propertyValue) {
+    this.properties.putIfAbsent(propertyId, propertyValue);
+  }
+
+  public void changeSku(Sku sku) {
+    this.sku = sku;
+  }
+
+  public void rename(String name) {
+    if (name == null || name.isBlank()) {
+      throw new IllegalArgumentException("Name cannot be empty");
+    }
+    if (name.length() > 100) {
+      throw new IllegalArgumentException("Name cannot exceed 100 characters");
+    }
+    this.name = name;
+  }
+
+  public void changeDescription(String description) {
+    this.description = description;
+  }
+
+  public void updatePricing(Money newCost, Money newPrice) {
+    validatePricing(newCost, newPrice);
+    this.cost = newCost;
+    this.price = newPrice;
+  }
 }
