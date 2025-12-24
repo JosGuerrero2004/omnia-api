@@ -30,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/products")
+@RequestMapping("/api/v1/products")
 public class ProductController {
   private final CreateProductUseCase createProductUseCase;
   private final DeleteProductUseCase deleteProductUseCase;

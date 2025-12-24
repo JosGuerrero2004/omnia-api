@@ -3,7 +3,9 @@ package org.josiasguerrero.products.infrastructure.persistence.mapper;
 import org.josiasguerrero.products.domain.entity.Property;
 import org.josiasguerrero.products.domain.valueobject.PropertyId;
 import org.josiasguerrero.products.infrastructure.persistence.entity.PropertyJpaEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PropertyPersistenceMapper {
 
   public Property toDomain(PropertyJpaEntity entity) {

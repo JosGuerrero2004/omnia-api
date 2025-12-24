@@ -15,6 +15,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -79,7 +80,7 @@ public class ProductJpaEntity {
     updatedAt = LocalDateTime.now();
   }
 
-  @PrePersist
+  @PreUpdate
   protected void onUpdate() {
     updatedAt = LocalDateTime.now();
   }

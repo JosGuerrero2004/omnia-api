@@ -2,21 +2,25 @@ package org.josiasguerrero.products.infrastructure.configuration;
 
 import org.josiasguerrero.products.application.usecase.Product.CreateProductUseCase;
 import org.josiasguerrero.products.application.usecase.Product.DeleteProductUseCase;
+import org.josiasguerrero.products.application.usecase.Product.FindAllProductsUseCase;
 import org.josiasguerrero.products.application.usecase.Product.FindProductByIdUseCase;
 import org.josiasguerrero.products.application.usecase.Product.UpdateProductCategoriesUseCase;
 import org.josiasguerrero.products.application.usecase.Product.UpdateProductPropertiesUseCase;
 import org.josiasguerrero.products.application.usecase.Product.UpdateProductUseCase;
 import org.josiasguerrero.products.application.usecase.brand.CreateBrandUseCase;
 import org.josiasguerrero.products.application.usecase.brand.DeleteBrandUseCase;
+import org.josiasguerrero.products.application.usecase.brand.FindAllBrandsUseCase;
 import org.josiasguerrero.products.application.usecase.brand.FindBrandByIdUseCase;
 import org.josiasguerrero.products.application.usecase.brand.FindBrandByNameUseCase;
 import org.josiasguerrero.products.application.usecase.brand.UpdateBrandUseCase;
 import org.josiasguerrero.products.application.usecase.category.CreateCategoryUseCase;
 import org.josiasguerrero.products.application.usecase.category.DeleteCategoryUseCase;
+import org.josiasguerrero.products.application.usecase.category.FindAllCategoriesUseCase;
 import org.josiasguerrero.products.application.usecase.category.FindCategoryByIdUseCase;
 import org.josiasguerrero.products.application.usecase.category.UpdateCategoryUseCase;
 import org.josiasguerrero.products.application.usecase.property.CreatePropertyUseCase;
 import org.josiasguerrero.products.application.usecase.property.DeletePropertyUseCase;
+import org.josiasguerrero.products.application.usecase.property.FindAllPropertiesUseCase;
 import org.josiasguerrero.products.application.usecase.property.FindPropertyByIdUseCase;
 import org.josiasguerrero.products.application.usecase.property.UpdatePropertyUseCase;
 import org.josiasguerrero.products.domain.port.BrandRepository;
@@ -41,6 +45,12 @@ public class UseCaseConfigurartion {
       DtoValidator dtoValidator) {
     return new CreateProductUseCase(productRepository, brandRepository, categoryRepository, propertyRepository,
         dtoValidator);
+  }
+
+  @Bean
+  public FindAllProductsUseCase findAllProductsUseCase(
+      ProductRepository productRepository) {
+    return new FindAllProductsUseCase(productRepository);
   }
 
   @Bean
@@ -91,6 +101,12 @@ public class UseCaseConfigurartion {
   }
 
   @Bean
+  public FindAllCategoriesUseCase findAllCategoriesUseCase(
+      CategoryRepository categoryRepository) {
+    return new FindAllCategoriesUseCase(categoryRepository);
+  }
+
+  @Bean
   public FindCategoryByIdUseCase findCategoryByIdUseCase(
       CategoryRepository categoryRepository) {
     return new FindCategoryByIdUseCase(categoryRepository);
@@ -116,6 +132,12 @@ public class UseCaseConfigurartion {
       BrandRepository brandRepository,
       DtoValidator validator) {
     return new CreateBrandUseCase(brandRepository, validator);
+  }
+
+  @Bean
+  public FindAllBrandsUseCase findAllBrandsUseCase(
+      BrandRepository brandRepository) {
+    return new FindAllBrandsUseCase(brandRepository);
   }
 
   @Bean
@@ -151,6 +173,12 @@ public class UseCaseConfigurartion {
       PropertyRepository propertyRepository,
       DtoValidator validator) {
     return new CreatePropertyUseCase(propertyRepository, validator);
+  }
+
+  @Bean
+  public FindAllPropertiesUseCase findAllPropertiesUseCase(
+      PropertyRepository propertyRepository) {
+    return new FindAllPropertiesUseCase(propertyRepository);
   }
 
   @Bean
