@@ -19,4 +19,8 @@ public record ProductId(UUID value) implements EntityId {
   public static ProductId from(String raw) {
     return new ProductId(UuidHelper.parse(raw));
   }
+
+  public static ProductId from(UUID uuid) {
+    return new ProductId(uuid);
+  }
 }

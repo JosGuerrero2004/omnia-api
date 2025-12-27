@@ -15,6 +15,7 @@ import org.josiasguerrero.products.domain.valueobject.CategoryId;
 import org.josiasguerrero.products.domain.valueobject.ProductId;
 import org.josiasguerrero.products.domain.valueobject.PropertyId;
 import org.josiasguerrero.products.domain.valueobject.Sku;
+import org.josiasguerrero.products.infrastructure.persistence.entity.BrandJpaEntity;
 import org.josiasguerrero.products.infrastructure.persistence.entity.CategoryJpaEntity;
 import org.josiasguerrero.products.infrastructure.persistence.entity.ProductJpaEntity;
 import org.josiasguerrero.products.infrastructure.persistence.entity.ProductPropertyJpaEntity;
@@ -46,6 +47,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     syncCategories(product, entity);
 
     syncProperties(product, entity);
+
+    syncBrand(entity, product);
 
     jpaRepository.save(entity);
   }
@@ -97,6 +100,25 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     entity.setCategories(categories);
+  }
+
+  private void syncBrand(ProductJpaEntity entity, Product product) {
+    if (product.getBrandId() == null) {
+      entity.setBrandId(null);
+      return;
+    }
+
+    if (entity.getBrandId() != null &&
+        product.getBrandId().value().equals(entity.getBrandId().getId())) {
+      return;
+    }
+
+    // Stub con solo el ID
+    BrandJpaEntity brandStub = BrandJpaEntity.builder()
+        .id(product.getBrandId().value())
+        .build();
+
+    entity.setBrandId(brandStub);
   }
 
   @Override
@@ -170,7 +192,6 @@ public class ProductRepositoryImpl implements ProductRepository {
     entity.setCost(product.getCost().amount());
     entity.setPrice(product.getPrice().amount());
     entity.setStock(product.getStock().quantity());
-    entity.setBrandId(product.getBrandId() != null ? product.getBrandId().value() : null);
   }
 
 }

@@ -15,7 +15,7 @@ public record CreateProductRequest(
     @NotBlank @Size(max = 100) String name,
     @NotNull @Positive BigDecimal cost,
     @NotNull @Positive BigDecimal price,
-    @NotNull @PositiveOrZero Integer initialStock,
+    @NotNull @PositiveOrZero Integer stock,
     String description,
     String barcode,
     Integer brandId,

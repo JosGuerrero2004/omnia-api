@@ -15,6 +15,7 @@ import org.josiasguerrero.products.domain.valueobject.PropertyId;
 import org.josiasguerrero.products.domain.valueobject.PropertyValue;
 import org.josiasguerrero.products.domain.valueobject.Sku;
 import org.josiasguerrero.products.domain.valueobject.Stock;
+import org.josiasguerrero.products.infrastructure.persistence.entity.BrandJpaEntity;
 import org.josiasguerrero.products.infrastructure.persistence.entity.ProductJpaEntity;
 import org.josiasguerrero.shared.domain.valueobject.Money;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Component;
 public class ProductPersistenceMapper {
   public Product toDomain(ProductJpaEntity entity) {
     // Convertir ID
-    ProductId id = ProductId.from(bytesToUUID(entity.getId()).toString());
+    ProductId id = ProductId.from(entity.getId());
 
     // Convertir value objects
     Sku sku = Sku.from(entity.getSku());
@@ -58,7 +59,7 @@ public class ProductPersistenceMapper {
 
   public ProductJpaEntity toJpaEntity(Product domain) {
     return ProductJpaEntity.builder()
-        .id(uuidToBytes(domain.getId().value()))
+        .id(domain.getId().value())
         .sku(domain.getSku().value())
         .name(domain.getName())
         .description(domain.getDescription())
@@ -66,7 +67,9 @@ public class ProductPersistenceMapper {
         .cost(domain.getCost().amount())
         .price(domain.getPrice().amount())
         .stock(domain.getStock().quantity())
-        .brandId(domain.getBrandId() != null ? domain.getBrandId().value() : null)
+        .brandId(domain.getBrandId() != null
+            ? BrandJpaEntity.builder().id(domain.getBrandId().value()).build()
+            : null)
         .createdAt(domain.getCreatedAt())
         .updatedAt(domain.getUpdatedAt())
         .build();

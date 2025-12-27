@@ -85,8 +85,8 @@ public class CreateProductUseCase {
       product.setBarcode(new Barcode(request.barcode()));
     }
 
-    if (request.initialStock() != null && request.initialStock() > 0) {
-      product.adjustStock(request.initialStock());
+    if (request.stock() != null && request.stock() > 0) {
+      product.adjustStock(request.stock());
     }
 
     if (request.brandId() != null) {
