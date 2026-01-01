@@ -23,6 +23,7 @@ public class UpdateProductUseCase {
   private final ProductRepository productRepository;
   private final BrandRepository brandRepository;
   private final DtoValidator dtoValidator;
+  private final ProductApplicationMapper productApplicationMapper;
 
   public ProductResponse execute(String productId, UpdateProductRequest request) {
 
@@ -37,7 +38,7 @@ public class UpdateProductUseCase {
 
     productRepository.save(product);
 
-    return ProductApplicationMapper.toResponse(product);
+    return productApplicationMapper.toResponse(product);
   }
 
   private void validateBusinessRules(Product product, UpdateProductRequest request) {

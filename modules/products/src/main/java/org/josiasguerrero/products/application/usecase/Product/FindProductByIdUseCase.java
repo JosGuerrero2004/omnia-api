@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 public class FindProductByIdUseCase {
 
   ProductRepository productRepository;
+  private final ProductApplicationMapper productApplicationMapper;
 
   public ProductResponse execute(String productId) {
     ProductId id = ProductId.from(productId);
@@ -23,7 +24,7 @@ public class FindProductByIdUseCase {
     Product product = productRepository.findById(id)
         .orElseThrow(() -> new ProductNotFoundException(id));
 
-    return ProductApplicationMapper.toResponse(product);
+    return productApplicationMapper.toResponse(product);
 
   }
 }

@@ -19,6 +19,7 @@ public class UpdateProductCategoriesUseCase {
 
   private final ProductRepository productRepository;
   private final CategoryRepository categoryRepository;
+  private final ProductApplicationMapper productApplicationMapper;
 
   public ProductResponse exceute(String productId, Set<Integer> categoryIds) {
     ProductId id = ProductId.from(productId);
@@ -30,7 +31,7 @@ public class UpdateProductCategoriesUseCase {
 
     productRepository.save(product);
 
-    return ProductApplicationMapper.toResponse(product);
+    return productApplicationMapper.toResponse(product);
   }
 
   public void validateAllCategoriesExists(Set<Integer> categoryIds) {

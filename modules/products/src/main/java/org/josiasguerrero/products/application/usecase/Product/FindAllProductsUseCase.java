@@ -11,8 +11,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class FindAllProductsUseCase {
   private ProductRepository productRepository;
+  private final ProductApplicationMapper productApplicationMapper;
 
   public List<ProductResponse> execute() {
-    return productRepository.findAll().stream().map(ProductApplicationMapper::toResponse).toList();
+    return productRepository.findAll().stream().map(productApplicationMapper::toResponse).toList();
   }
 }

@@ -14,9 +14,9 @@ public record ProductResponse(
     BigDecimal cost,
     BigDecimal price,
     Integer stock,
-    String brandId,
-    Set<Integer> categoryIds,
-    Map<Integer, String> properties,
+    BrandPResponse brand,
+    Set<CategoryPResponse> categories,
+    Map<String, String> properties, // aquí ya usas nombre de propiedad como key
     LocalDateTime createdAt,
     LocalDateTime updatedAt) {
 }

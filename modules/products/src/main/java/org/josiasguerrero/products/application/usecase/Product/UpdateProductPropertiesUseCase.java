@@ -20,6 +20,7 @@ public class UpdateProductPropertiesUseCase {
 
   private final ProductRepository productRepository;
   private final PropertyRepository propertyRepository;
+  private final ProductApplicationMapper productApplicationMapper;
 
   public ProductResponse exceute(String productId, Map<String, String> properties) {
     ProductId id = ProductId.from(productId);
@@ -33,7 +34,7 @@ public class UpdateProductPropertiesUseCase {
 
     productRepository.save(product);
 
-    return ProductApplicationMapper.toResponse(product);
+    return productApplicationMapper.toResponse(product);
   }
 
   private PropertyId findOrCreateProperty(String name) {

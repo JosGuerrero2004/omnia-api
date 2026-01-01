@@ -1,5 +1,6 @@
 package org.josiasguerrero.products.infrastructure.configuration;
 
+import org.josiasguerrero.products.application.mapper.ProductApplicationMapper;
 import org.josiasguerrero.products.application.usecase.Product.CreateProductUseCase;
 import org.josiasguerrero.products.application.usecase.Product.DeleteProductUseCase;
 import org.josiasguerrero.products.application.usecase.Product.FindAllProductsUseCase;
@@ -23,6 +24,7 @@ import org.josiasguerrero.products.application.usecase.property.DeletePropertyUs
 import org.josiasguerrero.products.application.usecase.property.FindAllPropertiesUseCase;
 import org.josiasguerrero.products.application.usecase.property.FindPropertyByIdUseCase;
 import org.josiasguerrero.products.application.usecase.property.UpdatePropertyUseCase;
+import org.josiasguerrero.products.domain.entity.Product;
 import org.josiasguerrero.products.domain.port.BrandRepository;
 import org.josiasguerrero.products.domain.port.CategoryRepository;
 import org.josiasguerrero.products.domain.port.ProductRepository;
@@ -42,29 +44,39 @@ public class UseCaseConfigurartion {
       BrandRepository brandRepository,
       CategoryRepository categoryRepository,
       PropertyRepository propertyRepository,
-      DtoValidator dtoValidator) {
+      DtoValidator dtoValidator,
+      ProductApplicationMapper productApplicationMapper) {
     return new CreateProductUseCase(productRepository, brandRepository, categoryRepository, propertyRepository,
-        dtoValidator);
+        dtoValidator, productApplicationMapper);
+  }
+
+  @Bean
+  public ProductApplicationMapper productApplicationMapper(BrandRepository brandRepository,
+      CategoryRepository categoryRepository, PropertyRepository propertyRepository) {
+    return new ProductApplicationMapper(brandRepository, categoryRepository, propertyRepository);
   }
 
   @Bean
   public FindAllProductsUseCase findAllProductsUseCase(
-      ProductRepository productRepository) {
-    return new FindAllProductsUseCase(productRepository);
+      ProductRepository productRepository,
+      ProductApplicationMapper productApplicationMapper) {
+    return new FindAllProductsUseCase(productRepository, productApplicationMapper);
   }
 
   @Bean
   public FindProductByIdUseCase findProductByIdUseCase(
-      ProductRepository productRepository) {
-    return new FindProductByIdUseCase(productRepository);
+      ProductRepository productRepository,
+      ProductApplicationMapper productApplicationMapper) {
+    return new FindProductByIdUseCase(productRepository, productApplicationMapper);
   }
 
   @Bean
   public UpdateProductUseCase updateProductUseCase(
       ProductRepository productRepository,
       BrandRepository brandRepository,
-      DtoValidator dtoValidator) {
-    return new UpdateProductUseCase(productRepository, brandRepository, dtoValidator);
+      DtoValidator dtoValidator,
+      ProductApplicationMapper productApplicationMapper) {
+    return new UpdateProductUseCase(productRepository, brandRepository, dtoValidator, productApplicationMapper);
   }
 
   @Bean
@@ -76,19 +88,21 @@ public class UseCaseConfigurartion {
   @Bean
   public UpdateProductCategoriesUseCase updateProductCategoriesUseCase(
       ProductRepository productRepository,
-      CategoryRepository categoryRepository) {
+      CategoryRepository categoryRepository,
+      ProductApplicationMapper productApplicationMapper) {
     return new UpdateProductCategoriesUseCase(
         productRepository,
-        categoryRepository);
+        categoryRepository, productApplicationMapper);
   }
 
   @Bean
   public UpdateProductPropertiesUseCase updateProductPropertiesUseCase(
       ProductRepository productRepository,
-      PropertyRepository propertyRepository) {
+      PropertyRepository propertyRepository,
+      ProductApplicationMapper productApplicationMapper) {
     return new UpdateProductPropertiesUseCase(
         productRepository,
-        propertyRepository);
+        propertyRepository, productApplicationMapper);
   }
 
   // ========== CATEGORY USE CASES ==========

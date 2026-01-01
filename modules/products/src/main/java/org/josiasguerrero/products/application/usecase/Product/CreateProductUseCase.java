@@ -29,6 +29,7 @@ public class CreateProductUseCase {
   private final CategoryRepository categoryRepository;
   private final PropertyRepository propertyRepository;
   private final DtoValidator dtoValidator;
+  private final ProductApplicationMapper productApplicationMapper;
 
   public ProductResponse execute(CreateProductRequest request) {
     dtoValidator.validate(request);
@@ -38,7 +39,7 @@ public class CreateProductUseCase {
     assignRelations(product, request);
     productRepository.save(product);
 
-    return ProductApplicationMapper.toResponse(product);
+    return productApplicationMapper.toResponse(product);
 
   }
 
