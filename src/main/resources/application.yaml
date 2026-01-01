@@ -13,7 +13,7 @@ spring:
     hibernate:
       format_sql: true
       dialect: org.hibernate.dialect.PostgreSQLDialect
-      ddl-auto: update
+      # ddl-auto: update
       jdbc:
         lob:
           non_contextual_creation: true
@@ -49,6 +49,10 @@ logging:
 #     app-admin:
 #       email: ${ADMIN_EMAIL}
 #       password: ${ADMIN_PASSWORD}
+
+cors:
+  allowed:
+    origin: ${CORS_ALLOWED_ORIGIN:http//localhost:3000}
 
 management:
   endpoints:
