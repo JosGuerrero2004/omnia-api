@@ -24,7 +24,6 @@ import org.josiasguerrero.products.application.usecase.property.DeletePropertyUs
 import org.josiasguerrero.products.application.usecase.property.FindAllPropertiesUseCase;
 import org.josiasguerrero.products.application.usecase.property.FindPropertyByIdUseCase;
 import org.josiasguerrero.products.application.usecase.property.UpdatePropertyUseCase;
-import org.josiasguerrero.products.domain.entity.Product;
 import org.josiasguerrero.products.domain.port.BrandRepository;
 import org.josiasguerrero.products.domain.port.CategoryRepository;
 import org.josiasguerrero.products.domain.port.ProductRepository;

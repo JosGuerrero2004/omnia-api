@@ -1,5 +1,7 @@
 package org.josiasguerrero.omnia_api;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +12,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CorsConfig {
 
-  @Value("${cors.allowed.origin}")
+  @Value("${cors.allowed.origins}")
   private String allowedOrigin;
 
   @Bean
@@ -19,7 +21,7 @@ public class CorsConfig {
     CorsConfiguration config = new CorsConfiguration();
 
     config.setAllowCredentials(true);
-    config.addAllowedOrigin(allowedOrigin); // ← aquí ya usa la variable
+    config.setAllowedOrigins(Arrays.asList(allowedOrigin.split(","))); // ← aquí ya usa la variable
     config.addAllowedHeader("*");
     config.addAllowedMethod("*");
 

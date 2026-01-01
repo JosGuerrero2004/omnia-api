@@ -52,7 +52,7 @@ logging:
 
 cors:
   allowed:
-    origin: ${CORS_ALLOWED_ORIGIN:http//localhost:3000}
+    origins: ${ALLOWED_ORIGINS}
 
 management:
   endpoints:
