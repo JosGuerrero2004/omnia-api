@@ -11,6 +11,7 @@ COPY build.gradle settings.gradle ./
 
 # Copiamos el resto del código fuente
 COPY src src
+COPY modules modules
 
 # Damos permisos al wrapper
 RUN chmod +x gradlew
