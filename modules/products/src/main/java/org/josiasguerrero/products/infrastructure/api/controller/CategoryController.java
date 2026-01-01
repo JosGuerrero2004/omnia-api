@@ -41,7 +41,7 @@ public class CategoryController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable Integer id) {
+  public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
     deleteCategoryUseCase.execute(id);
     return ResponseEntity.noContent().build();
   }
@@ -53,13 +53,13 @@ public class CategoryController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<CategoryResponse> findById(@PathVariable Integer id) {
+  public ResponseEntity<CategoryResponse> findById(@PathVariable("id") Integer id) {
     CategoryResponse response = findCategoryByIdUseCase.execute(id);
     return ResponseEntity.ok(response);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<CategoryResponse> update(@PathVariable Integer id,
+  public ResponseEntity<CategoryResponse> update(@PathVariable("id") Integer id,
       @Valid @RequestBody UpdateCategoryRequest request) {
     CategoryResponse response = updateCategoryUseCase.execute(id, request);
     return ResponseEntity.ok(response);

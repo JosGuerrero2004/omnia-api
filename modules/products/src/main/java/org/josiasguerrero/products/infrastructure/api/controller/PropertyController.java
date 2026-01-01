@@ -41,7 +41,7 @@ public class PropertyController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable Integer id) {
+  public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
     deletePropertyUseCase.execute(id);
     return ResponseEntity.noContent().build();
   }
@@ -53,13 +53,13 @@ public class PropertyController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<PropertyResponse> findById(@PathVariable Integer id) {
+  public ResponseEntity<PropertyResponse> findById(@PathVariable("id") Integer id) {
     var response = findPropertyByIdUseCase.execute(id);
     return ResponseEntity.ok(response);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<PropertyResponse> update(@PathVariable Integer id, UpdatePropertyRequest request) {
+  public ResponseEntity<PropertyResponse> update(@PathVariable("id") Integer id, UpdatePropertyRequest request) {
     var response = updatePropertyUseCase.exceute(id, request);
     return ResponseEntity.ok(response);
   }

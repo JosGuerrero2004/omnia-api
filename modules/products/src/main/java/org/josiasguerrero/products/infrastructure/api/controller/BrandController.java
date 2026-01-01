@@ -43,7 +43,7 @@ public class BrandController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable Integer id) {
+  public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
     deleteBrandUseCase.execute(id);
     return ResponseEntity.noContent().build();
   }
@@ -55,19 +55,19 @@ public class BrandController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<BrandResponse> findById(@PathVariable Integer id) {
+  public ResponseEntity<BrandResponse> findById(@PathVariable("id") Integer id) {
     BrandResponse response = findBrandByIdUseCase.execute(id);
     return ResponseEntity.ok(response);
   }
 
-  @GetMapping("/{name}")
-  public ResponseEntity<BrandResponse> findByName(@PathVariable String name) {
+  @GetMapping("/name/{name}")
+  public ResponseEntity<BrandResponse> findByName(@PathVariable("name") String name) {
     BrandResponse response = findBrandByNameUseCase.execute(name);
     return ResponseEntity.ok(response);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<BrandResponse> update(@PathVariable Integer id,
+  public ResponseEntity<BrandResponse> update(@PathVariable("id") Integer id,
       @Valid @RequestBody UpdateBrandRequest request) {
     BrandResponse response = updateBrandUseCase.execute(id, request);
     return ResponseEntity.ok(response);

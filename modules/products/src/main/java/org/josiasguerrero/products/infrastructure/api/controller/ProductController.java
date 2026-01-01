@@ -48,13 +48,13 @@ public class ProductController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<ProductResponse> delete(@PathVariable String id) {
+  public ResponseEntity<ProductResponse> delete(@PathVariable("id") String id) {
     deleteProductUseCase.execute(id);
     return ResponseEntity.noContent().build();
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<ProductResponse> findById(@PathVariable String id) {
+  public ResponseEntity<ProductResponse> findById(@PathVariable("id") String id) {
     ProductResponse response = findProductByIdUseCase.execute(id);
     return ResponseEntity.ok(response);
   }
@@ -66,14 +66,14 @@ public class ProductController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<ProductResponse> update(@PathVariable String id,
+  public ResponseEntity<ProductResponse> update(@PathVariable("id") String id,
       @Valid @RequestBody UpdateProductRequest request) {
     ProductResponse response = updateProductUseCase.execute(id, request);
     return ResponseEntity.ok(response);
   }
 
   @PostMapping("/{id}/categories")
-  public ResponseEntity<ProductResponse> updateCategories(@PathVariable String id,
+  public ResponseEntity<ProductResponse> updateCategories(@PathVariable("id") String id,
       @RequestBody Set<Integer> categoryIds) {
 
     ProductResponse response = updateProductCategoriesUseCase.exceute(id, categoryIds);
@@ -81,7 +81,7 @@ public class ProductController {
   }
 
   @PostMapping("/{id}/properties")
-  public ResponseEntity<ProductResponse> updateProperties(@PathVariable String id,
+  public ResponseEntity<ProductResponse> updateProperties(@PathVariable("id") String id,
       @RequestBody Map<String, String> properties) {
     ProductResponse response = updateProductPropertiesUseCase.exceute(id, properties);
 
